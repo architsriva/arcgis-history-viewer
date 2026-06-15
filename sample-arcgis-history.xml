@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResultViews>
+<ResultView Tool='Train Deep Learning Model'>
+<CommandLine>TrainDeepLearningModel_ia C:\Demo\ArcGISHistory\TrainingData\SolarPanels_Demo C:\Demo\ArcGISHistory\Models\SolarPanel_Demo_Model 30 # 4 # # # C:\Demo\ArcGISHistory\Models\Pretrained\SolarPanel_Pretrained.dlpk 10 STOP_TRAINING FREEZE_MODEL Default # 400 # # &apos;Validation loss&apos; ENABLE_TENSORBOARD</CommandLine>
+<ToolSource>C:\Program Files\ArcGIS\Pro\Resources\ArcToolbox\toolboxes\Image Analyst Tools.tbx\Deep Learning\TrainDeepLearningModel</ToolSource>
+<StartTime>Thursday, June 11, 2026 3:03:21 PM</StartTime>
+<Parameters>
+<Inputs>
+<Parameter Label='Input Training Data' Type='Dataset'>C:\Demo\ArcGISHistory\TrainingData\SolarPanels_Demo</Parameter>
+<Parameter Label='Max Epochs' Type='Scalar'>30</Parameter>
+<Parameter Label='Batch Size' Type='Scalar'>4</Parameter>
+<Parameter Label='Pre-trained Model' Type='Dataset'>C:\Demo\ArcGISHistory\Models\Pretrained\SolarPanel_Pretrained.dlpk</Parameter>
+<Parameter Label='Validation %' Type='Scalar'>10</Parameter>
+<Parameter Label='Stop when model stops improving' Type='Scalar'>true</Parameter>
+<Parameter Label='Freeze Model' Type='Scalar'>true</Parameter>
+<Parameter Label='Data Augmentation' Type='Scalar'>DEFAULT</Parameter>
+<Parameter Label='Chip Size' Type='Scalar'>400</Parameter>
+<Parameter Label='Monitor Metric' Type='Scalar'>VALID_LOSS</Parameter>
+<Parameter Label='Enable Tensorboard' Type='Scalar'>true</Parameter>
+</Inputs>
+<Outputs>
+<Parameter Label='Output Folder' Type='Dataset'>C:\Demo\ArcGISHistory\Models\SolarPanel_Demo_Model</Parameter>
+<Parameter Label='Output Model' Type='Dataset'>C:\Demo\ArcGISHistory\Models\SolarPanel_Demo_Model\SolarPanel_Demo_Model.dlpk</Parameter>
+</Outputs>
+</Parameters>
+<Environments>
+<Environment Label='Auto Commit'>1000</Environment>
+<Environment Label='Scratch Workspace'>C:\Demo\ArcGISHistory\Project\Default.gdb</Environment>
+<Environment Label='Minimize memory use during analysis on terrains'>false</Environment>
+<Environment Label='Compression'>LZ77</Environment>
+<Environment Label='Coincident Points'>MEAN</Environment>
+<Environment Label='Use Detailed Aggregation'>false</Environment>
+<Environment Label='Curve Processing Method'>EXACT</Environment>
+<Environment Label='Random Number Generator'>0 ACM599</Environment>
+<Environment Label='Raster Statistics'>STATISTICS 1 1</Environment>
+<Environment Label='Transfer Geodatabase Field Properties'>false</Environment>
+<Environment Label='Cell Size Projection Method'>CONVERT_UNITS</Environment>
+<Environment Label='Transfer field domain descriptions'>false</Environment>
+<Environment Label='Maintain Attachments'>true</Environment>
+<Environment Label='Resampling Method'>NEAREST</Environment>
+<Environment Label='Match Multidimensional Variable'>true</Environment>
+<Environment Label='Output has Z Values'>Same As Input</Environment>
+<Environment Label='Maintain fully qualified field names'>true</Environment>
+<Environment Label='Tile Size'>128 128</Environment>
+<Environment Label='Pyramid'>PYRAMIDS -1 NEAREST DEFAULT 75 NO_SKIP NO_SIPS</Environment>
+<Environment Label='Union Dimension'>false</Environment>
+<Environment Label='Default TIN Storage Version'>CURRENT</Environment>
+<Environment Label='NoData'>NONE</Environment>
+<Environment Label='Output has M Values'>Same As Input</Environment>
+<Environment Label='Cell Alignment'>DEFAULT</Environment>
+<Environment Label='Maintain Spatial Index'>false</Environment>
+<Environment Label='Preserve Global IDs'>false</Environment>
+<Environment Label='Current Workspace'>C:\Demo\ArcGISHistory\Project\Default.gdb</Environment>
+</Environments>
+<Messages>
+<Message Type='Informative'>Start Time: Thursday, June 11, 2026 3:03:21 PM</Message>
+<Message Type='Informative'>Learning Rate - slice(6.9183097091893625e-06, 6.918309709189363e-05, None)</Message>
+<Message Type='Informative'>To visualize the details on current training session via Tensorboard, click the following URL. Enable &apos;Reload Data&apos; in Tensorboard Settings to auto-refresh every 30 seconds:</Message>
+<Message Type='Informative'>json:[{&quot;element&quot;: &quot;hyperlink&quot;, &quot;data&quot;: &quot;http://localhost:6006/&quot;, &quot;link&quot;: &quot;http://localhost:6006/&quot;}]</Message>
+<Message Type='Informative'>Training model...</Message>
+<Message Type='Informative'>epoch      training loss        validation loss      average_precision    time                </Message>
+<Message Type='Informative'>0          0.6010238528251648   0.5327391624450684   0.7780888676643372   00:01:38             </Message>
+<Message Type='Informative'>1          0.546063244342804    0.5321109890937805   0.7771037220954895   00:01:39             </Message>
+<Message Type='Informative'>2          0.5390121936798096   0.5283656120300293   0.7905781269073486   00:01:38             </Message>
+<Message Type='Informative'>3          0.5580444931983948   0.5603989362716675   0.7186084985733032   00:01:38             </Message>
+<Message Type='Informative'>4          0.597894012928009    0.5713809728622437   0.7594603300094604   00:01:39             </Message>
+<Message Type='Informative'>5          0.5884894728660583   0.5794937610626221   0.7687857747077942   00:01:41             </Message>
+<Message Type='Informative'>6          0.630018413066864    0.5697826147079468   0.7972380518913269   00:01:40             </Message>
+<Message Type='Informative'>7          0.5543005466461182   0.5984654426574707   0.7897817492485046   00:01:38             </Message>
+<Message Type='Informative'>8          0.5748466849327087   0.5680606961250305   0.7842565774917603   00:01:39             </Message>
+<Message Type='Informative'>average_precision_score: {SolarPanel: 0.7905780786821792}</Message>
+</Messages>
+<EndTime>Thursday, June 11, 2026 3:03:21 PM</EndTime>
+<EndTime></EndTime>
+</ResultView>
+</ResultViews>
+

@@ -1,0 +1,537 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sample-arcgis-history.xml</title>
+<style>
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --text: #17202a;
+  --muted: #667085;
+  --line: #d8dee8;
+  --soft: #edf1f6;
+  --accent: #2854c5;
+  --accent-2: #0f8b8d;
+  --danger: #bd2d2d;
+  --warning: #936900;
+  --success: #16794c;
+  --shadow: 0 8px 26px rgba(23, 32, 42, 0.08);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.page {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 44px;
+}
+header.hero {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 18px;
+}
+.kicker {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.12;
+  margin: 0 0 10px;
+}
+.hero p { color: var(--muted); max-width: 850px; margin: 0; }
+.stats {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: 18px;
+}
+.stat {
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+}
+.stat span, .overview-grid span {
+  color: var(--muted);
+  display: block;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+.stat strong, .overview-grid strong { display: block; font-size: 15px; word-break: break-word; }
+.toolbar {
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+input[type="search"] {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  flex: 1 1 260px;
+  font: inherit;
+  min-width: 0;
+  padding: 9px 10px;
+}
+button {
+  background: var(--text);
+  border: 0;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font: 600 13px/1 "Segoe UI", system-ui, sans-serif;
+  padding: 10px 12px;
+}
+button.secondary { background: #475467; }
+.match-count { color: var(--muted); font-size: 13px; }
+.result-card, .index-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+details > summary {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  list-style: none;
+  padding: 16px 18px;
+}
+details > summary::-webkit-details-marker { display: none; }
+.summary-main {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  min-width: 0;
+}
+.summary-main strong { display: block; font-size: 16px; }
+.summary-main small { color: var(--muted); display: block; margin-top: 2px; }
+.summary-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.index {
+  align-items: center;
+  background: var(--accent);
+  border-radius: 6px;
+  color: white;
+  display: inline-flex;
+  font-weight: 800;
+  height: 30px;
+  justify-content: center;
+  min-width: 30px;
+  padding: 0 7px;
+}
+.card-body {
+  border-top: 1px solid var(--line);
+  padding: 18px;
+}
+.overview-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  margin-bottom: 14px;
+}
+.overview-grid > div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+}
+.section {
+  margin-top: 16px;
+}
+.section h3 {
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+.count {
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 1px 7px;
+}
+.empty { color: var(--muted); margin: 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  background: #f2f4f7;
+  color: #344054;
+  font-size: 12px;
+  text-align: left;
+}
+th, td {
+  border: 1px solid var(--line);
+  padding: 9px 10px;
+  vertical-align: top;
+}
+td:first-child, th:first-child { width: 190px; }
+code, pre {
+  font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+pre {
+  background: #111827;
+  border-radius: 8px;
+  color: #e5e7eb;
+  margin: 0;
+  max-height: 360px;
+  overflow: auto;
+  padding: 12px;
+}
+.compact pre { max-height: 220px; }
+.raw {
+  margin-top: 16px;
+}
+.raw summary {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  display: block;
+  font-weight: 700;
+  padding: 10px 12px;
+}
+.raw pre { margin-top: 8px; }
+.pill, .tag {
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 5px 8px;
+  white-space: nowrap;
+}
+.pill.info { background: #e8efff; color: var(--accent); }
+.pill.neutral, .tag { background: var(--soft); color: #475467; }
+.pill.danger { background: #ffe8e8; color: var(--danger); }
+.pill.warning { background: #fff3c4; color: var(--warning); }
+.pill.success { background: #dcfce7; color: var(--success); }
+.messages td:first-child, .messages th:first-child { width: 54px; }
+.messages td:nth-child(2), .messages th:nth-child(2) { width: 130px; }
+.metrics td { position: relative; }
+.bar {
+  border-radius: 999px;
+  display: inline-block;
+  height: 8px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.bar.loss { background: #ef8a62; }
+.bar.valid { background: #67a9cf; }
+.bar.metric { background: #1a9850; }
+.index-panel { padding: 16px; }
+.index-table td:first-child, .index-table th:first-child { width: 240px; }
+.tools-list {
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+.footer-note {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 20px;
+}
+@media (max-width: 720px) {
+  .page { width: min(100vw - 18px, 1180px); padding-top: 10px; }
+  header.hero { padding: 16px; }
+  details > summary { align-items: flex-start; flex-direction: column; }
+  .summary-meta { justify-content: flex-start; }
+  .toolbar { position: static; }
+  table { display: block; overflow-x: auto; }
+  td:first-child, th:first-child { width: auto; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <h1>sample-arcgis-history.xml</h1>
+    <p>Generated from <a href="../sample-arcgis-history.xml">source XML</a> created by ArcGIS Pro geoprocessing history logging. Use search to find tools, parameters, paths, messages, and command line text.</p>
+    
+    <div class="stats">
+      <div class="stat"><span>Result Views</span><strong>1</strong></div>
+      <div class="stat"><span>File Size</span><strong>5.9 KB</strong></div>
+      <div class="stat"><span>First Start</span><strong>Thursday, June 11, 2026 3:03:21 PM</strong></div>
+      <div class="stat"><span>Last End</span><strong>Thursday, June 11, 2026 3:03:21 PM</strong></div>
+      <div class="stat"><span>Message Types</span><strong>Informative: 16</strong></div>
+    </div>
+    <p class="tools-list"><strong>Tools:</strong> Train Deep Learning Model: 1</p>
+  </header>
+  <nav class="toolbar">
+    <a href="index.html">Back to index</a>
+    <input id="search" type="search" placeholder="Search this history file">
+    <button id="expandAll" type="button">Expand all</button>
+    <button id="collapseAll" class="secondary" type="button">Collapse all</button>
+    <span id="matchCount" class="match-count"></span>
+  </nav>
+  <article class='result-card' data-search='Train Deep Learning Model Thursday, June 11, 2026 3:03:21 PM Thursday, June 11, 2026 3:03:21 PM TrainDeepLearningModel_ia C:\Demo\ArcGISHistory\TrainingData\SolarPanels_Demo C:\Demo\ArcGISHistory\Models\SolarPanel_Demo_Model 30 # 4 # # # C:\Demo\ArcGISHistory\Models\Pretrained\SolarPanel_Pretrained.dlpk 10 STOP_TRAINING FREEZE_MODEL Default # 400 # # &#39;Validation loss&#39; ENABLE_TENSORBOARD C:\Program Files\ArcGIS\Pro\Resources\ArcToolbox\toolboxes\Image Analyst Tools.tbx\Deep Learning\TrainDeepLearningModel'>
+<details open>
+<summary>
+<span class='summary-main'><span class='index'>1</span><span><strong>Train Deep Learning Model</strong><small>Thursday, June 11, 2026 3:03:21 PM</small></span></span>
+<span class='summary-meta'><span class='pill info'>16 messages</span><span class='pill neutral'>11 inputs</span><span class='pill neutral'>2 outputs</span></span>
+</summary>
+<div class='card-body'>
+<section class='overview-grid'>
+<div><span>Tool</span><strong>Train Deep Learning Model</strong></div>
+<div><span>Start</span><strong>Thursday, June 11, 2026 3:03:21 PM</strong></div>
+<div><span>End</span><strong>Thursday, June 11, 2026 3:03:21 PM</strong></div>
+<div><span>Message Types</span><strong>Informative: 16</strong></div>
+</section>
+<section class='section compact'><h3>Tool Source</h3><pre>C:\Program Files\ArcGIS\Pro\Resources\ArcToolbox\toolboxes\Image Analyst Tools.tbx\Deep Learning\TrainDeepLearningModel</pre></section>
+<section class='section compact'><h3>Command Line</h3><pre>TrainDeepLearningModel_ia C:\Demo\ArcGISHistory\TrainingData\SolarPanels_Demo C:\Demo\ArcGISHistory\Models\SolarPanel_Demo_Model 30 # 4 # # # C:\Demo\ArcGISHistory\Models\Pretrained\SolarPanel_Pretrained.dlpk 10 STOP_TRAINING FREEZE_MODEL Default # 400 # # &#39;Validation loss&#39; ENABLE_TENSORBOARD</pre></section>
+<section class='section'>
+<h3>Inputs <span class='count'>11</span></h3>
+<table>
+<thead><tr><th>Label</th><th>Type</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Input Training Data</td><td><span class='tag'>Dataset</span></td><td><code>C:\Demo\ArcGISHistory\TrainingData\SolarPanels_Demo</code></td></tr>
+<tr><td>Max Epochs</td><td><span class='tag'>Scalar</span></td><td><code>30</code></td></tr>
+<tr><td>Batch Size</td><td><span class='tag'>Scalar</span></td><td><code>4</code></td></tr>
+<tr><td>Pre-trained Model</td><td><span class='tag'>Dataset</span></td><td><code>C:\Demo\ArcGISHistory\Models\Pretrained\SolarPanel_Pretrained.dlpk</code></td></tr>
+<tr><td>Validation %</td><td><span class='tag'>Scalar</span></td><td><code>10</code></td></tr>
+<tr><td>Stop when model stops improving</td><td><span class='tag'>Scalar</span></td><td><code>true</code></td></tr>
+<tr><td>Freeze Model</td><td><span class='tag'>Scalar</span></td><td><code>true</code></td></tr>
+<tr><td>Data Augmentation</td><td><span class='tag'>Scalar</span></td><td><code>DEFAULT</code></td></tr>
+<tr><td>Chip Size</td><td><span class='tag'>Scalar</span></td><td><code>400</code></td></tr>
+<tr><td>Monitor Metric</td><td><span class='tag'>Scalar</span></td><td><code>VALID_LOSS</code></td></tr>
+<tr><td>Enable Tensorboard</td><td><span class='tag'>Scalar</span></td><td><code>true</code></td></tr>
+</tbody></table>
+</section>
+
+<section class='section'>
+<h3>Outputs <span class='count'>2</span></h3>
+<table>
+<thead><tr><th>Label</th><th>Type</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Output Folder</td><td><span class='tag'>Dataset</span></td><td><code>C:\Demo\ArcGISHistory\Models\SolarPanel_Demo_Model</code></td></tr>
+<tr><td>Output Model</td><td><span class='tag'>Dataset</span></td><td><code>C:\Demo\ArcGISHistory\Models\SolarPanel_Demo_Model\SolarPanel_Demo_Model.dlpk</code></td></tr>
+</tbody></table>
+</section>
+
+<section class='section'>
+<h3>Layer Info <span class='count'>0</span></h3>
+<p class='empty'>No layer info.</p>
+</section>
+
+<section class='section'>
+<h3>Environments <span class='count'>27</span></h3>
+<table>
+<thead><tr><th>Label</th><th>Value</th></tr></thead><tbody>
+<tr><td>Auto Commit</td><td><code>1000</code></td></tr>
+<tr><td>Scratch Workspace</td><td><code>C:\Demo\ArcGISHistory\Project\Default.gdb</code></td></tr>
+<tr><td>Minimize memory use during analysis on terrains</td><td><code>false</code></td></tr>
+<tr><td>Compression</td><td><code>LZ77</code></td></tr>
+<tr><td>Coincident Points</td><td><code>MEAN</code></td></tr>
+<tr><td>Use Detailed Aggregation</td><td><code>false</code></td></tr>
+<tr><td>Curve Processing Method</td><td><code>EXACT</code></td></tr>
+<tr><td>Random Number Generator</td><td><code>0 ACM599</code></td></tr>
+<tr><td>Raster Statistics</td><td><code>STATISTICS 1 1</code></td></tr>
+<tr><td>Transfer Geodatabase Field Properties</td><td><code>false</code></td></tr>
+<tr><td>Cell Size Projection Method</td><td><code>CONVERT_UNITS</code></td></tr>
+<tr><td>Transfer field domain descriptions</td><td><code>false</code></td></tr>
+<tr><td>Maintain Attachments</td><td><code>true</code></td></tr>
+<tr><td>Resampling Method</td><td><code>NEAREST</code></td></tr>
+<tr><td>Match Multidimensional Variable</td><td><code>true</code></td></tr>
+<tr><td>Output has Z Values</td><td><code>Same As Input</code></td></tr>
+<tr><td>Maintain fully qualified field names</td><td><code>true</code></td></tr>
+<tr><td>Tile Size</td><td><code>128 128</code></td></tr>
+<tr><td>Pyramid</td><td><code>PYRAMIDS -1 NEAREST DEFAULT 75 NO_SKIP NO_SIPS</code></td></tr>
+<tr><td>Union Dimension</td><td><code>false</code></td></tr>
+<tr><td>Default TIN Storage Version</td><td><code>CURRENT</code></td></tr>
+<tr><td>NoData</td><td><code>NONE</code></td></tr>
+<tr><td>Output has M Values</td><td><code>Same As Input</code></td></tr>
+<tr><td>Cell Alignment</td><td><code>DEFAULT</code></td></tr>
+<tr><td>Maintain Spatial Index</td><td><code>false</code></td></tr>
+<tr><td>Preserve Global IDs</td><td><code>false</code></td></tr>
+<tr><td>Current Workspace</td><td><code>C:\Demo\ArcGISHistory\Project\Default.gdb</code></td></tr>
+</tbody></table>
+</section>
+
+<section class='section'>
+<h3>Training Metrics <span class='count'>9</span></h3>
+<table class='metrics'>
+<thead><tr><th>Epoch</th><th>Training Loss</th><th>Validation Loss</th><th>Average Precision</th><th>Time</th></tr></thead><tbody>
+<tr><td>0</td><td><span class='bar loss' style='width:95%'></span><code>0.6010</code></td><td><span class='bar valid' style='width:85%'></span><code>0.5327</code></td><td><span class='bar metric' style='width:78%'></span><code>77.8%</code></td><td><code>00:01:38</code></td></tr>
+<tr><td>1</td><td><span class='bar loss' style='width:87%'></span><code>0.5461</code></td><td><span class='bar valid' style='width:84%'></span><code>0.5321</code></td><td><span class='bar metric' style='width:78%'></span><code>77.7%</code></td><td><code>00:01:39</code></td></tr>
+<tr><td>2</td><td><span class='bar loss' style='width:86%'></span><code>0.5390</code></td><td><span class='bar valid' style='width:84%'></span><code>0.5284</code></td><td><span class='bar metric' style='width:79%'></span><code>79.1%</code></td><td><code>00:01:38</code></td></tr>
+<tr><td>3</td><td><span class='bar loss' style='width:89%'></span><code>0.5580</code></td><td><span class='bar valid' style='width:89%'></span><code>0.5604</code></td><td><span class='bar metric' style='width:72%'></span><code>71.9%</code></td><td><code>00:01:38</code></td></tr>
+<tr><td>4</td><td><span class='bar loss' style='width:95%'></span><code>0.5979</code></td><td><span class='bar valid' style='width:91%'></span><code>0.5714</code></td><td><span class='bar metric' style='width:76%'></span><code>75.9%</code></td><td><code>00:01:39</code></td></tr>
+<tr><td>5</td><td><span class='bar loss' style='width:93%'></span><code>0.5885</code></td><td><span class='bar valid' style='width:92%'></span><code>0.5795</code></td><td><span class='bar metric' style='width:77%'></span><code>76.9%</code></td><td><code>00:01:41</code></td></tr>
+<tr><td>6</td><td><span class='bar loss' style='width:100%'></span><code>0.6300</code></td><td><span class='bar valid' style='width:90%'></span><code>0.5698</code></td><td><span class='bar metric' style='width:80%'></span><code>79.7%</code></td><td><code>00:01:40</code></td></tr>
+<tr><td>7</td><td><span class='bar loss' style='width:88%'></span><code>0.5543</code></td><td><span class='bar valid' style='width:95%'></span><code>0.5985</code></td><td><span class='bar metric' style='width:79%'></span><code>79.0%</code></td><td><code>00:01:38</code></td></tr>
+<tr><td>8</td><td><span class='bar loss' style='width:91%'></span><code>0.5748</code></td><td><span class='bar valid' style='width:90%'></span><code>0.5681</code></td><td><span class='bar metric' style='width:78%'></span><code>78.4%</code></td><td><code>00:01:39</code></td></tr>
+</tbody></table>
+</section>
+
+<section class='section'>
+<h3>Messages <span class='count'>16</span></h3>
+<table class='messages'>
+<thead><tr><th>#</th><th>Type</th><th>Message</th></tr></thead><tbody>
+<tr><td>1</td><td><span class='pill info'>Informative</span></td><td><code>Start Time: Thursday, June 11, 2026 3:03:21 PM</code></td></tr>
+<tr><td>2</td><td><span class='pill info'>Informative</span></td><td><code>Learning Rate - slice(6.9183097091893625e-06, 6.918309709189363e-05, None)</code></td></tr>
+<tr><td>3</td><td><span class='pill info'>Informative</span></td><td><code>To visualize the details on current training session via Tensorboard, click the following URL. Enable &#39;Reload Data&#39; in Tensorboard Settings to auto-refresh every 30 seconds:</code></td></tr>
+<tr><td>4</td><td><span class='pill info'>Informative</span></td><td><code>json:[{&quot;element&quot;: &quot;hyperlink&quot;, &quot;data&quot;: &quot;http://localhost:6006/&quot;, &quot;link&quot;: &quot;http://localhost:6006/&quot;}]</code></td></tr>
+<tr><td>5</td><td><span class='pill info'>Informative</span></td><td><code>Training model...</code></td></tr>
+<tr><td>6</td><td><span class='pill info'>Informative</span></td><td><code>epoch      training loss        validation loss      average_precision    time</code></td></tr>
+<tr><td>7</td><td><span class='pill info'>Informative</span></td><td><code>0          0.6010238528251648   0.5327391624450684   0.7780888676643372   00:01:38</code></td></tr>
+<tr><td>8</td><td><span class='pill info'>Informative</span></td><td><code>1          0.546063244342804    0.5321109890937805   0.7771037220954895   00:01:39</code></td></tr>
+<tr><td>9</td><td><span class='pill info'>Informative</span></td><td><code>2          0.5390121936798096   0.5283656120300293   0.7905781269073486   00:01:38</code></td></tr>
+<tr><td>10</td><td><span class='pill info'>Informative</span></td><td><code>3          0.5580444931983948   0.5603989362716675   0.7186084985733032   00:01:38</code></td></tr>
+<tr><td>11</td><td><span class='pill info'>Informative</span></td><td><code>4          0.597894012928009    0.5713809728622437   0.7594603300094604   00:01:39</code></td></tr>
+<tr><td>12</td><td><span class='pill info'>Informative</span></td><td><code>5          0.5884894728660583   0.5794937610626221   0.7687857747077942   00:01:41</code></td></tr>
+<tr><td>13</td><td><span class='pill info'>Informative</span></td><td><code>6          0.630018413066864    0.5697826147079468   0.7972380518913269   00:01:40</code></td></tr>
+<tr><td>14</td><td><span class='pill info'>Informative</span></td><td><code>7          0.5543005466461182   0.5984654426574707   0.7897817492485046   00:01:38</code></td></tr>
+<tr><td>15</td><td><span class='pill info'>Informative</span></td><td><code>8          0.5748466849327087   0.5680606961250305   0.7842565774917603   00:01:39</code></td></tr>
+<tr><td>16</td><td><span class='pill info'>Informative</span></td><td><code>average_precision_score: {SolarPanel: 0.7905780786821792}</code></td></tr>
+</tbody></table>
+</section>
+
+<details class='raw'><summary>Raw ResultView XML</summary><pre>&lt;ResultView Tool=&#39;Train Deep Learning Model&#39;&gt;
+&lt;CommandLine&gt;TrainDeepLearningModel_ia C:\Demo\ArcGISHistory\TrainingData\SolarPanels_Demo C:\Demo\ArcGISHistory\Models\SolarPanel_Demo_Model 30 # 4 # # # C:\Demo\ArcGISHistory\Models\Pretrained\SolarPanel_Pretrained.dlpk 10 STOP_TRAINING FREEZE_MODEL Default # 400 # # &amp;apos;Validation loss&amp;apos; ENABLE_TENSORBOARD&lt;/CommandLine&gt;
+&lt;ToolSource&gt;C:\Program Files\ArcGIS\Pro\Resources\ArcToolbox\toolboxes\Image Analyst Tools.tbx\Deep Learning\TrainDeepLearningModel&lt;/ToolSource&gt;
+&lt;StartTime&gt;Thursday, June 11, 2026 3:03:21 PM&lt;/StartTime&gt;
+&lt;Parameters&gt;
+&lt;Inputs&gt;
+&lt;Parameter Label=&#39;Input Training Data&#39; Type=&#39;Dataset&#39;&gt;C:\Demo\ArcGISHistory\TrainingData\SolarPanels_Demo&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Max Epochs&#39; Type=&#39;Scalar&#39;&gt;30&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Batch Size&#39; Type=&#39;Scalar&#39;&gt;4&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Pre-trained Model&#39; Type=&#39;Dataset&#39;&gt;C:\Demo\ArcGISHistory\Models\Pretrained\SolarPanel_Pretrained.dlpk&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Validation %&#39; Type=&#39;Scalar&#39;&gt;10&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Stop when model stops improving&#39; Type=&#39;Scalar&#39;&gt;true&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Freeze Model&#39; Type=&#39;Scalar&#39;&gt;true&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Data Augmentation&#39; Type=&#39;Scalar&#39;&gt;DEFAULT&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Chip Size&#39; Type=&#39;Scalar&#39;&gt;400&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Monitor Metric&#39; Type=&#39;Scalar&#39;&gt;VALID_LOSS&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Enable Tensorboard&#39; Type=&#39;Scalar&#39;&gt;true&lt;/Parameter&gt;
+&lt;/Inputs&gt;
+&lt;Outputs&gt;
+&lt;Parameter Label=&#39;Output Folder&#39; Type=&#39;Dataset&#39;&gt;C:\Demo\ArcGISHistory\Models\SolarPanel_Demo_Model&lt;/Parameter&gt;
+&lt;Parameter Label=&#39;Output Model&#39; Type=&#39;Dataset&#39;&gt;C:\Demo\ArcGISHistory\Models\SolarPanel_Demo_Model\SolarPanel_Demo_Model.dlpk&lt;/Parameter&gt;
+&lt;/Outputs&gt;
+&lt;/Parameters&gt;
+&lt;Environments&gt;
+&lt;Environment Label=&#39;Auto Commit&#39;&gt;1000&lt;/Environment&gt;
+&lt;Environment Label=&#39;Scratch Workspace&#39;&gt;C:\Demo\ArcGISHistory\Project\Default.gdb&lt;/Environment&gt;
+&lt;Environment Label=&#39;Minimize memory use during analysis on terrains&#39;&gt;false&lt;/Environment&gt;
+&lt;Environment Label=&#39;Compression&#39;&gt;LZ77&lt;/Environment&gt;
+&lt;Environment Label=&#39;Coincident Points&#39;&gt;MEAN&lt;/Environment&gt;
+&lt;Environment Label=&#39;Use Detailed Aggregation&#39;&gt;false&lt;/Environment&gt;
+&lt;Environment Label=&#39;Curve Processing Method&#39;&gt;EXACT&lt;/Environment&gt;
+&lt;Environment Label=&#39;Random Number Generator&#39;&gt;0 ACM599&lt;/Environment&gt;
+&lt;Environment Label=&#39;Raster Statistics&#39;&gt;STATISTICS 1 1&lt;/Environment&gt;
+&lt;Environment Label=&#39;Transfer Geodatabase Field Properties&#39;&gt;false&lt;/Environment&gt;
+&lt;Environment Label=&#39;Cell Size Projection Method&#39;&gt;CONVERT_UNITS&lt;/Environment&gt;
+&lt;Environment Label=&#39;Transfer field domain descriptions&#39;&gt;false&lt;/Environment&gt;
+&lt;Environment Label=&#39;Maintain Attachments&#39;&gt;true&lt;/Environment&gt;
+&lt;Environment Label=&#39;Resampling Method&#39;&gt;NEAREST&lt;/Environment&gt;
+&lt;Environment Label=&#39;Match Multidimensional Variable&#39;&gt;true&lt;/Environment&gt;
+&lt;Environment Label=&#39;Output has Z Values&#39;&gt;Same As Input&lt;/Environment&gt;
+&lt;Environment Label=&#39;Maintain fully qualified field names&#39;&gt;true&lt;/Environment&gt;
+&lt;Environment Label=&#39;Tile Size&#39;&gt;128 128&lt;/Environment&gt;
+&lt;Environment Label=&#39;Pyramid&#39;&gt;PYRAMIDS -1 NEAREST DEFAULT 75 NO_SKIP NO_SIPS&lt;/Environment&gt;
+&lt;Environment Label=&#39;Union Dimension&#39;&gt;false&lt;/Environment&gt;
+&lt;Environment Label=&#39;Default TIN Storage Version&#39;&gt;CURRENT&lt;/Environment&gt;
+&lt;Environment Label=&#39;NoData&#39;&gt;NONE&lt;/Environment&gt;
+&lt;Environment Label=&#39;Output has M Values&#39;&gt;Same As Input&lt;/Environment&gt;
+&lt;Environment Label=&#39;Cell Alignment&#39;&gt;DEFAULT&lt;/Environment&gt;
+&lt;Environment Label=&#39;Maintain Spatial Index&#39;&gt;false&lt;/Environment&gt;
+&lt;Environment Label=&#39;Preserve Global IDs&#39;&gt;false&lt;/Environment&gt;
+&lt;Environment Label=&#39;Current Workspace&#39;&gt;C:\Demo\ArcGISHistory\Project\Default.gdb&lt;/Environment&gt;
+&lt;/Environments&gt;
+&lt;Messages&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;Start Time: Thursday, June 11, 2026 3:03:21 PM&lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;Learning Rate - slice(6.9183097091893625e-06, 6.918309709189363e-05, None)&lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;To visualize the details on current training session via Tensorboard, click the following URL. Enable &amp;apos;Reload Data&amp;apos; in Tensorboard Settings to auto-refresh every 30 seconds:&lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;json:[{&amp;quot;element&amp;quot;: &amp;quot;hyperlink&amp;quot;, &amp;quot;data&amp;quot;: &amp;quot;http://localhost:6006/&amp;quot;, &amp;quot;link&amp;quot;: &amp;quot;http://localhost:6006/&amp;quot;}]&lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;Training model...&lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;epoch      training loss        validation loss      average_precision    time                &lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;0          0.6010238528251648   0.5327391624450684   0.7780888676643372   00:01:38             &lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;1          0.546063244342804    0.5321109890937805   0.7771037220954895   00:01:39             &lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;2          0.5390121936798096   0.5283656120300293   0.7905781269073486   00:01:38             &lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;3          0.5580444931983948   0.5603989362716675   0.7186084985733032   00:01:38             &lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;4          0.597894012928009    0.5713809728622437   0.7594603300094604   00:01:39             &lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;5          0.5884894728660583   0.5794937610626221   0.7687857747077942   00:01:41             &lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;6          0.630018413066864    0.5697826147079468   0.7972380518913269   00:01:40             &lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;7          0.5543005466461182   0.5984654426574707   0.7897817492485046   00:01:38             &lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;8          0.5748466849327087   0.5680606961250305   0.7842565774917603   00:01:39             &lt;/Message&gt;
+&lt;Message Type=&#39;Informative&#39;&gt;average_precision_score: {SolarPanel: 0.7905780786821792}&lt;/Message&gt;
+&lt;/Messages&gt;
+&lt;EndTime&gt;Thursday, June 11, 2026 3:03:21 PM&lt;/EndTime&gt;
+&lt;EndTime&gt;&lt;/EndTime&gt;
+&lt;/ResultView&gt;</pre></details>
+</div>
+</details>
+</article>
+
+
+    <div class="footer-note">
+    <p>Generated 2026-06-15 16:05:31. Source XML was not modified.</p>
+    <p><strong>XML source:</strong> ArcGIS Pro can write geoprocessing history to XML log files. See <a href="https://doc.esri.com/en/arcgis-pro/latest/help/analysis/geoprocessing/basics/geoprocessing-history.html#537">Esri's geoprocessing history documentation</a>.</p>
+    <p><strong>Original ArcGIS Pro history folder:</strong> <code>%AppData%\Esri\ArcGISPro\ArcToolbox\History</code></p>
+    <p><strong>Copy latest XML here before running:</strong> <code>the repository root folder, next to Convert-ArcGISHistoryToHtml.ps1</code></p>
+    <p><strong>Generate latest report:</strong> <code>powershell -NoProfile -ExecutionPolicy Bypass -File &quot;.\Convert-ArcGISHistoryToHtml.ps1&quot; -SourceDir &quot;.&quot; -OutputDir &quot;.\html&quot;</code></p>
+  </div>
+</main>
+<script>
+const cards = Array.from(document.querySelectorAll(".result-card"));
+const search = document.querySelector("#search");
+const matchCount = document.querySelector("#matchCount");
+function updateMatches() {
+  if (!search || !matchCount) return;
+  const term = search.value.trim().toLowerCase();
+  let visible = 0;
+  cards.forEach((card) => {
+    const text = card.dataset.search.toLowerCase() + " " + card.innerText.toLowerCase();
+    const match = !term || text.includes(term);
+    card.hidden = !match;
+    if (match) visible += 1;
+  });
+  matchCount.textContent = `${visible} of ${cards.length} shown`;
+}
+if (search) search.addEventListener("input", updateMatches);
+document.querySelector("#expandAll")?.addEventListener("click", () => {
+  document.querySelectorAll(".result-card > details").forEach((detail) => detail.open = true);
+});
+document.querySelector("#collapseAll")?.addEventListener("click", () => {
+  document.querySelectorAll(".result-card > details").forEach((detail) => detail.open = false);
+});
+updateMatches();
+</script>
+</body>
+</html>

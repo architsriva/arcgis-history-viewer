@@ -1,0 +1,22 @@
+name: Verify
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  generated-html:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate demo HTML
+        shell: pwsh
+        run: |
+          powershell -NoProfile -ExecutionPolicy Bypass -File ".\Convert-ArcGISHistoryToHtml.ps1" -SourceDir "." -OutputDir ".\html"
+
+      - name: Verify generated HTML
+        shell: pwsh
+        run: |
+          powershell -NoProfile -ExecutionPolicy Bypass -File ".\Test-GeneratedHtml.ps1"

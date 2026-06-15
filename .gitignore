@@ -1,0 +1,21 @@
+# Keep the sanitized demo XML tracked, but ignore copied real ArcGIS Pro history logs.
+*.xml
+!sample-arcgis-history.xml
+
+# Keep the sanitized demo HTML tracked, but ignore newly generated private reports.
+html/*
+!html/index.html
+!html/sample-arcgis-history.html
+
+# Local/editor noise.
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.tmp
+*.log
+
+# PowerShell/editor artifacts.
+*.ps1xml
+*.ps1~
+
