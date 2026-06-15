@@ -20,8 +20,8 @@ The sample paths in the XML and HTML are demo paths, not real project paths.
 
 Open the generated demo:
 
-- [Demo index](html/index.html)
-- [Sample Train Deep Learning Model report](html/sample-arcgis-history.html)
+- [Demo Index](https://architsriva.github.io/arcgis-history-viewer/html/index.html)
+- [Deep Learning Model report](https://architsriva.github.io/arcgis-history-viewer/html/sample-arcgis-history.html)
 
 ## Generate Reports
 
@@ -47,5 +47,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ".\Test-GeneratedHtml.ps1"
 Real ArcGIS Pro history XML can include local paths, machine names, project names, and other environment details. Keep real XML files out of public GitHub repositories unless they have been reviewed or sanitized.
 
 This project is released under the MIT License. See [LICENSE](LICENSE).
+
 
 
